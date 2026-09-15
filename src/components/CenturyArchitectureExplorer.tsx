@@ -72,6 +72,41 @@ export const CenturyArchitectureExplorer: React.FC<CenturyArchitectureExplorerPr
     computroniumTime: string;
   } | null>(null);
 
+  const futureComputerScienceTracks = [
+    {
+      title: 'Hardware & Materials',
+      items: ['CFET and 3D silicon', 'Photonic logic', 'Quantum processors', 'Neuromorphic hardware', 'Bio-silicon systems', 'Non-von Neumann architectures']
+    },
+    {
+      title: 'Programming Languages',
+      items: ['Low-level systems languages', 'Safe and verified languages', 'Quantum and probabilistic languages', 'AI-native languages', 'Unified programming language (UPL)', 'Domain-specific languages', 'Human-centered programming abstractions']
+    },
+    {
+      title: 'Algorithms & Computation',
+      items: ['Optimization and search', 'Graph and probabilistic algorithms', 'Quantum algorithms', 'Neural-symbolic learning', 'Self-improving compilers', 'Distributed intelligence routines']
+    },
+    {
+      title: 'Calculus, Math & Theory',
+      items: ['Differential equations', 'Probability and statistics', 'Graph theory', 'Information theory', 'Category theory', 'Complexity and computability']
+    },
+    {
+      title: 'Formal Methods & Verification',
+      items: ['Model checking', 'Theorem proving', 'Type systems', 'SAT/SMT solving', 'Formal security proofs', 'Verified AI and robotics control']
+    },
+    {
+      title: 'Systems & Networking',
+      items: ['Operating systems', 'Distributed systems', 'Cloud and edge compute', 'Secure protocols', 'Global computer fabrics', 'Autonomous infrastructure']
+    },
+    {
+      title: 'AI, Cognitive & Human Systems',
+      items: ['Machine learning', 'Reasoning agents', 'Human-AI co-creation', 'Adaptive interfaces', 'Cognitive architectures', 'Ethical and governance systems']
+    },
+    {
+      title: 'Security, Privacy & Trust',
+      items: ['Cryptography', 'Zero-trust design', 'Homomorphic encryption', 'Cybersecurity', 'Identity systems', 'Trustworthy autonomous systems']
+    }
+  ];
+
   // Auto thermal update for 2035
   useEffect(() => {
     const base = 30 + (vcoreVoltage - 0.4) * 35;
@@ -149,6 +184,83 @@ export const CenturyArchitectureExplorer: React.FC<CenturyArchitectureExplorerPr
             <Play className={`w-3.5 h-3.5 ${benchmarkRunning ? 'animate-spin' : ''}`} />
             <span>{benchmarkRunning ? `Simulating ${benchmarkProgress}%...` : 'Run 100-Year Hardware Benchmark'}</span>
           </button>
+        </div>
+      </div>
+
+      <div className="p-5 rounded-xl bg-slate-900/70 border border-slate-800 shadow-2xl">
+        <div className="flex items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.22em] text-cyan-300 font-mono font-bold">
+              Next 10,000 Years of Computer Science
+            </div>
+            <h3 className="mt-2 text-xl font-bold text-white">
+              Computing, programming, mathematics, theory, and the full future of machines
+            </h3>
+          </div>
+          <div className="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-[10px] font-mono uppercase tracking-[0.2em]">
+            10k Year Horizon
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+          {futureComputerScienceTracks.map((track) => (
+            <div key={track.title} className="rounded-lg border border-slate-800 bg-slate-950/70 p-3">
+              <div className="mb-2 text-sm font-semibold text-cyan-300">{track.title}</div>
+              <ul className="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+                {track.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 rounded-lg border border-indigo-500/30 bg-gradient-to-r from-indigo-950/40 via-slate-950 to-cyan-950/30 p-4">
+          <div className="text-[10px] uppercase tracking-[0.22em] text-indigo-300 font-mono font-bold mb-2">
+            Core vision
+          </div>
+          <p className="text-sm text-slate-200 leading-relaxed">
+            Over the next 10,000 years, computer science will combine hardware, software, mathematics, logic, language design, and physics into a unified field of programmable reality. The discipline will expand from silicon and networks into quantum computing, biological intelligence, formal proof, autonomous systems, and the design of trustworthy intelligence that can reason, verify, and evolve under human values.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-[10px] font-mono text-slate-300">
+            {['Computer architecture', 'Programming languages', 'Algorithms', 'Calculus', 'Formal methods', 'Theory of computation', 'Distributed systems', 'Cybersecurity', 'AI ethics', 'Autonomous design'].map((tag) => (
+              <span key={tag} className="rounded-full border border-slate-700 bg-slate-900/80 px-2 py-1">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 xl:grid-cols-[1.2fr_0.8fr] gap-4">
+          <div className="rounded-lg border border-cyan-500/30 bg-slate-950/80 p-4">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-300 font-mono font-bold mb-3">
+              Unified Programming Language (UPL)
+            </div>
+            <pre className="overflow-x-auto rounded-md border border-slate-800 bg-slate-900 p-3 text-[11px] leading-relaxed text-cyan-100 font-mono">
+{`resource budget energy=1nJ latency=50ps memory=4GB {
+  task matrix_compute = PhotonicMatrixMultiply(inputs, weights)
+  proof invariant safety: output_is_deterministic && no_overflow
+  compile target = Quantum + Classical + Neuromorphic
+  verify contract = "trustworthy_autonomous_reasoning"
+  return result
+}`}
+            </pre>
+          </div>
+
+          <div className="rounded-lg border border-violet-500/30 bg-gradient-to-br from-violet-950/40 to-slate-950 p-4">
+            <div className="text-[10px] uppercase tracking-[0.2em] text-violet-300 font-mono font-bold mb-3">
+              Language goals
+            </div>
+            <ul className="space-y-2 text-sm text-slate-200">
+              <li>• One syntax across hardware, software, AI, and proof.</li>
+              <li>• Native contracts for safety, resources, and trust.</li>
+              <li>• Compiles to CPU, GPU, photonic, quantum, and bio-silicon targets.</li>
+              <li>• Supports reasoning, learning, verification, and execution together.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
