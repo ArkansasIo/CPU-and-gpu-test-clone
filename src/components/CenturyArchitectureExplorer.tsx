@@ -121,11 +121,14 @@ export const CenturyArchitectureExplorer: React.FC<CenturyArchitectureExplorerPr
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="space-y-1 z-10">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold">
               Centenary Technology Roadmap
             </span>
             <span className="text-xs text-slate-400 font-mono">2026 — 2126 (100 Years)</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              Author & Developed by Stephen Deline Jr.
+            </span>
           </div>
           <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2.5">
             <Sparkles className="w-5 h-5 text-cyan-400 animate-pulse" />

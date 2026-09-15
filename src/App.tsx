@@ -94,7 +94,9 @@ export default function App() {
       }
 
       // Add a comprehensive README.md to the zip
-      const readmeContent = `# Video Game Console & Hardware Architecture Simulation Suite
+      const readmeContent = `# Video Game Console, PC & 100-Year Hardware Architecture Simulation Suite
+Author: Stephen Deline Jr.
+Developed by: Stephen Deline Jr.
 Sony Computer Entertainment • Microsoft Corporation • Nintendo • IBM • NVIDIA • AMD
 
 ## Systems Included & C/C++ Subsystem Sources:

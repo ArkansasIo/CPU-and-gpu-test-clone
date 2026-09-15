@@ -15,6 +15,8 @@ export const FUTURE_100Y_SILICON_SOURCE_FILES: SourceFile[] = [
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2035 (10 YEARS)
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * 1nm 3D Complementary-FET (CFET) Heterogeneous Processor Specification
  * ============================================================================
  * 
@@ -176,6 +178,8 @@ void CenturyCfetProcessor::PrintArchitectureTelemetry() const {
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2050 (25 YEARS)
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Light-Speed All-Photonic Silicon Tensor Accelerator (OPU / Photonic GPU)
  * ============================================================================
  * 
@@ -311,6 +315,8 @@ void AllPhotonicTensorAccelerator::PrintArchitectureTelemetry() const {
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2055 (30 YEARS)
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Topological Quantum Processing Unit (Majorana Zero Modes)
  * ============================================================================
  * 
@@ -376,6 +382,8 @@ private:
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2075 (50 YEARS)
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Whole-Brain Scale Synthetic Neuromorphic Bio-Silicon Processor
  * ============================================================================
  * 
@@ -434,6 +442,8 @@ private:
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2126 (100 YEARS OUT)
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Reversible Thermodynamic Computronium Lattice & Spacetime Curvature Logic
  * ============================================================================
  * 
@@ -554,6 +564,8 @@ void ComputroniumSubstrate::PrintArchitectureTelemetry() const {
     content: `/**
  * ============================================================================
  * CENTURY HARDWARE ARCHITECTURE SUITE - ERA 2085
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Quantum Entangled Element Interconnect Bus (Q-EIB)
  * ============================================================================
  * 

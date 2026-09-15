@@ -23,6 +23,8 @@ const MASTER_BENCHMARK_SOURCE: SourceFile = {
   content: `/**
  * ============================================================================
  * Video Game Console & Processor Architecture Benchmark & Simulation Suite
+ * Author: Stephen Deline Jr.
+ * Developed by: Stephen Deline Jr.
  * Multi-Platform Hardware Comparison & Diagnostic Execution Harness
  * ============================================================================
  * 

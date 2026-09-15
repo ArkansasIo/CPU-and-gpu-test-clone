@@ -102,12 +102,15 @@ export const Header: React.FC<HeaderProps> = ({
             <Cpu className="w-6 h-6 text-white" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-lg font-bold tracking-tight text-white font-sans">
                 PS3 Cell B.E. CPU Source Suite
               </h1>
               <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                 STI Cell Broadband Engine
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-medium">
+                Author & Developed by Stephen Deline Jr.
               </span>
             </div>
             <p className="text-xs text-slate-400 font-mono">
