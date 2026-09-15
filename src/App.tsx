@@ -10,13 +10,54 @@ import { EibRingVisualizer } from './components/EibRingVisualizer';
 import { IsaReferenceView } from './components/IsaReferenceView';
 import { CellSpecsView } from './components/CellSpecsView';
 import { ConsoleArchitectureExplorer } from './components/ConsoleArchitectureExplorer';
+import { CenturyArchitectureExplorer } from './components/CenturyArchitectureExplorer';
+import { SettingsModal } from './components/SettingsModal';
+import { AppSettings, DEFAULT_SETTINGS } from './types/settings';
+import { soundEngine } from './utils/audioFeedback';
 
 export default function App() {
   const [files, setFiles] = useState<SourceFile[]>(ALL_CONSOLE_SOURCE_FILES);
   const [activeFileId, setActiveFileId] = useState<string>('multi-platform-benchmark-cpp');
-  const [activeTab, setActiveTab] = useState<'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles'>('consoles');
+  const [activeTab, setActiveTab] = useState<'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles' | 'century'>('century');
   const [simulatorAssembly, setSimulatorAssembly] = useState<string | undefined>(undefined);
   const [isZipping, setIsZipping] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  // Settings State with LocalStorage Persistence
+  const [settings, setSettings] = useState<AppSettings>(() => {
+    try {
+      const saved = localStorage.getItem('cell_century_app_settings');
+      if (saved) return { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
+    } catch {
+      // Ignore
+    }
+    return DEFAULT_SETTINGS;
+  });
+
+  const handleUpdateSettings = (newSettings: AppSettings) => {
+    setSettings(newSettings);
+    try {
+      localStorage.setItem('cell_century_app_settings', JSON.stringify(newSettings));
+    } catch {
+      // Ignore
+    }
+  };
+
+  const handleResetSettings = () => {
+    setSettings(DEFAULT_SETTINGS);
+    try {
+      localStorage.removeItem('cell_century_app_settings');
+    } catch {
+      // Ignore
+    }
+  };
+
+  const handleTabChange = (tab: 'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles' | 'century') => {
+    if (settings.audioEnabled) {
+      soundEngine.playClick(settings.audioVolume);
+    }
+    setActiveTab(tab);
+  };
 
   const activeFile = files.find(f => f.id === activeFileId) || files[0];
 
@@ -129,14 +170,26 @@ Sony Computer Entertainment • Microsoft Corporation • Nintendo • IBM • N
       {/* Top Application Header */}
       <Header
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleTabChange}
         onDownloadAllZip={handleDownloadAllZip}
         isZipping={isZipping}
         totalFiles={files.length}
+        onOpenSettings={() => setIsSettingsOpen(true)}
+        showTelemetryOverlay={settings.showTelemetryOverlay}
       />
 
       {/* Main Workspace View */}
       <main className="flex-1 flex overflow-hidden">
+        {activeTab === 'century' && (
+          <CenturyArchitectureExplorer
+            onSelectSourceFile={(file) => {
+              setActiveFileId(file.id);
+              setActiveTab('sources');
+            }}
+            files={files}
+          />
+        )}
+
         {activeTab === 'consoles' && (
           <ConsoleArchitectureExplorer
             onSelectSourceFile={handleSelectSourceFileFromExplorer}
@@ -176,6 +229,15 @@ Sony Computer Entertainment • Microsoft Corporation • Nintendo • IBM • N
           <CellSpecsView />
         )}
       </main>
+
+      {/* Options & Settings Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        settings={settings}
+        onUpdateSettings={handleUpdateSettings}
+        onResetSettings={handleResetSettings}
+      />
     </div>
   );
 }

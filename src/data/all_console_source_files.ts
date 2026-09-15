@@ -9,6 +9,7 @@ import { CONSOLE_OS_SOURCE_FILES } from './console_os_source_files';
 import { PC_CPU_SOURCE_FILES } from './pc_cpu_source_files';
 import { PC_GPU_SOURCE_FILES } from './pc_gpu_source_files';
 import { PC_COMPONENTS_SOURCE_FILES } from './pc_components_source_files';
+import { FUTURE_100Y_SILICON_SOURCE_FILES } from './future_100y_silicon_source_files';
 
 // Master Multi-Platform Hardware Simulation Harness & Benchmark
 const MASTER_BENCHMARK_SOURCE: SourceFile = {
@@ -255,5 +256,6 @@ export const ALL_CONSOLE_SOURCE_FILES: SourceFile[] = [
   ...PC_CPU_SOURCE_FILES,
   ...PC_GPU_SOURCE_FILES,
   ...PC_COMPONENTS_SOURCE_FILES,
+  ...FUTURE_100Y_SILICON_SOURCE_FILES,
   MASTER_BENCHMARK_SOURCE
 ];

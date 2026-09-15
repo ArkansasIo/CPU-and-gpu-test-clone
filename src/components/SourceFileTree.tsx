@@ -116,6 +116,7 @@ export const SourceFileTree: React.FC<SourceFileTreeProps> = ({
         <div className="flex items-center gap-1 overflow-x-auto pb-1 text-[10px] font-mono no-scrollbar">
           {[
             { id: 'all', label: 'All Systems' },
+            { id: 'future', label: '100Y Future' },
             { id: 'pc', label: 'PC Silicon' },
             { id: 'ps5', label: 'PS5' },
             { id: 'ps4', label: 'PS4' },
@@ -144,7 +145,7 @@ export const SourceFileTree: React.FC<SourceFileTreeProps> = ({
 
         {/* Quick Category Pills */}
         <div className="flex items-center gap-1 overflow-x-auto pb-1 text-[10px] font-mono no-scrollbar">
-          {['all', 'cpu', 'gpu', 'components', 'os', 'spe', 'ppe', 'rsx', 'ps5', 'ps4', 'xbox360', 'xboxone', 'switch', 'ps2', 'memory', 'samples'].map((cat) => (
+          {['all', 'future', 'cpu', 'gpu', 'components', 'os', 'spe', 'ppe', 'rsx', 'ps5', 'ps4', 'xbox360', 'xboxone', 'switch', 'ps2', 'memory', 'samples'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -154,7 +155,7 @@ export const SourceFileTree: React.FC<SourceFileTreeProps> = ({
                   : 'text-slate-500 hover:text-slate-300 bg-slate-900/40'
               }`}
             >
-              {cat === 'all' ? 'All Types' : cat === 'os' ? 'OS / Kernels' : cat === 'cpu' ? 'CPUs' : cat === 'gpu' ? 'GPUs' : cat === 'components' ? 'Parts' : cat.toUpperCase()}
+              {cat === 'all' ? 'All Types' : cat === 'future' ? '100Y Future' : cat === 'os' ? 'OS / Kernels' : cat === 'cpu' ? 'CPUs' : cat === 'gpu' ? 'GPUs' : cat === 'components' ? 'Parts' : cat.toUpperCase()}
             </button>
           ))}
         </div>

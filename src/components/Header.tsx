@@ -9,15 +9,18 @@ import {
   Download, 
   Sparkles,
   Activity,
-  Gamepad2
+  Gamepad2,
+  Settings
 } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles';
-  setActiveTab: (tab: 'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles') => void;
+  activeTab: 'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles' | 'century';
+  setActiveTab: (tab: 'sources' | 'simulator' | 'eib' | 'isa' | 'specs' | 'consoles' | 'century') => void;
   onDownloadAllZip: () => void;
   isZipping: boolean;
   totalFiles: number;
+  onOpenSettings?: () => void;
+  showTelemetryOverlay?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -25,61 +28,72 @@ export const Header: React.FC<HeaderProps> = ({
   setActiveTab,
   onDownloadAllZip,
   isZipping,
-  totalFiles
+  totalFiles,
+  onOpenSettings,
+  showTelemetryOverlay = true
 }) => {
   return (
     <header className="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-40">
       {/* Top Telemetry Strip */}
-      <div className="border-b border-slate-800/60 px-4 py-1.5 flex items-center justify-between text-xs font-mono text-slate-400 bg-slate-900/40">
-        <div className="flex items-center gap-4 flex-wrap">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-slate-300 font-semibold">CELL B.E. ARCHITECTURE</span>
+      {showTelemetryOverlay && (
+        <div className="border-b border-slate-800/60 px-4 py-1.5 flex items-center justify-between text-xs font-mono text-slate-400 bg-slate-900/40">
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-slate-300 font-semibold">CELL B.E. & CENTURY ROADMAP</span>
+            </div>
+            <div className="hidden sm:flex items-center gap-1 text-slate-400">
+              <span className="text-slate-500">CLOCK:</span>
+              <span className="text-cyan-400 font-medium">3.20 GHz — 10^42 Ops</span>
+            </div>
+            <div className="hidden md:flex items-center gap-1 text-slate-400">
+              <span className="text-slate-500">PPE:</span>
+              <span className="text-slate-300">64-bit PowerPC (SMT2)</span>
+            </div>
+            <div className="hidden md:flex items-center gap-1 text-slate-400">
+              <span className="text-slate-500">SPEs:</span>
+              <span className="text-amber-400 font-medium">7 Active</span>
+              <span className="text-slate-500 text-[11px]">(6 Game + 1 OS)</span>
+            </div>
+            <div className="hidden lg:flex items-center gap-1 text-slate-400">
+              <span className="text-slate-500">XDR DRAM:</span>
+              <span className="text-emerald-400">256 MB (25.6 GB/s)</span>
+            </div>
+            <div className="hidden xl:flex items-center gap-1 text-slate-400">
+              <span className="text-slate-500">OPTICAL / Q-EIB:</span>
+              <span className="text-indigo-400 font-medium">12.8 Tbps — Quantum EPR</span>
+            </div>
           </div>
-          <div className="hidden sm:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">CLOCK:</span>
-            <span className="text-cyan-400 font-medium">3.20 GHz</span>
-          </div>
-          <div className="hidden md:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">PPE:</span>
-            <span className="text-slate-300">64-bit PowerPC (SMT2)</span>
-          </div>
-          <div className="hidden md:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">SPEs:</span>
-            <span className="text-amber-400 font-medium">7 Active</span>
-            <span className="text-slate-500 text-[11px]">(6 Game + 1 OS)</span>
-          </div>
-          <div className="hidden lg:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">XDR DRAM:</span>
-            <span className="text-emerald-400">256 MB (25.6 GB/s)</span>
-          </div>
-          <div className="hidden xl:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">RSX GPU:</span>
-            <span className="text-pink-400 font-medium">550 MHz (256 MB GDDR3)</span>
-          </div>
-          <div className="hidden 2xl:flex items-center gap-1 text-slate-400">
-            <span className="text-slate-500">EIB RING:</span>
-            <span className="text-indigo-400 font-medium">204.8 GB/s</span>
-          </div>
-        </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 text-slate-400">
-            <Activity className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-slate-300">{totalFiles} Source Files</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 text-slate-400">
+              <Activity className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="text-slate-300">{totalFiles} Source Files</span>
+            </div>
+            <button
+              id="download-zip-btn"
+              onClick={onDownloadAllZip}
+              disabled={isZipping}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 transition-all font-mono text-xs disabled:opacity-50"
+              title="Download complete Cell B.E. source tree as ZIP"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>{isZipping ? 'Generating ZIP...' : 'Export Source Tree (.zip)'}</span>
+            </button>
+            {onOpenSettings && (
+              <button
+                id="btn-open-settings-top"
+                onClick={onOpenSettings}
+                className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all font-mono text-xs"
+                title="Open Simulator Options & Hardware Settings"
+              >
+                <Settings className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Options</span>
+              </button>
+            )}
           </div>
-          <button
-            id="download-zip-btn"
-            onClick={onDownloadAllZip}
-            disabled={isZipping}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 transition-all font-mono text-xs disabled:opacity-50"
-            title="Download complete Cell B.E. source tree as ZIP"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>{isZipping ? 'Generating ZIP...' : 'Export Source Tree (.zip)'}</span>
-          </button>
         </div>
-      </div>
+      )}
 
       {/* Main Navigation Bar */}
       <div className="px-4 py-3 flex items-center justify-between flex-wrap gap-4">
@@ -179,7 +193,20 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Gamepad2 className="w-4 h-4" />
-            <span>Consoles & Hardware</span>
+            <span>Consoles & PC</span>
+          </button>
+
+          <button
+            id="nav-tab-century"
+            onClick={() => setActiveTab('century')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+              activeTab === 'century'
+                ? 'bg-gradient-to-r from-cyan-500 to-indigo-500 text-slate-950 font-bold shadow-md shadow-cyan-950/40'
+                : 'text-cyan-300 hover:text-white hover:bg-cyan-950/40 border border-cyan-500/20'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+            <span>100Y Future</span>
           </button>
         </nav>
       </div>

@@ -6,8 +6,8 @@ export interface SourceFile {
   id: string;
   name: string;
   path: string;
-  category: 'spe' | 'ppe' | 'bus' | 'mmu' | 'rsx' | 'memory' | 'io' | 'samples' | 'hdl' | 'build' | 'ps3' | 'ps4' | 'ps5' | 'xbox360' | 'xboxone' | 'switch' | 'ps2' | 'pc' | 'os' | 'cpu' | 'gpu' | 'components';
-  platform?: 'ps3' | 'ps4' | 'ps5' | 'xbox360' | 'xboxone' | 'switch' | 'ps2' | 'pc' | 'shared';
+  category: 'spe' | 'ppe' | 'bus' | 'mmu' | 'rsx' | 'memory' | 'io' | 'samples' | 'hdl' | 'build' | 'ps3' | 'ps4' | 'ps5' | 'xbox360' | 'xboxone' | 'switch' | 'ps2' | 'pc' | 'os' | 'cpu' | 'gpu' | 'components' | 'future';
+  platform?: 'ps3' | 'ps4' | 'ps5' | 'xbox360' | 'xboxone' | 'switch' | 'ps2' | 'pc' | 'shared' | 'future';
   language: 'cpp' | 'c' | 'assembly' | 'verilog' | 'header' | 'cmake' | 'makefile';
   description: string;
   content: string;
